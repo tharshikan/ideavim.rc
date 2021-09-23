@@ -1,0 +1,206 @@
+" Quit insert mode
+inoremap hh <Esc>
+inoremap jk <Esc>
+inoremap kk <Esc>
+
+
+
+" mapping standard horizontal movements to be movements by word instead
+noremap  d b
+noremap D B
+noremap n w
+noremap N W
+
+noremap  h j
+noremap t k
+
+" Move to the start of line/ end of line
+noremap w ^
+noremap e $
+
+"travesing methods
+noremap W :action MethodUp<CR>
+noremap E :action MethodDown<CR>
+
+" Move half page faster
+nnoremap H  <C-d>
+nnoremap T  <C-u>
+
+" Redo
+nnoremap U <C-r>
+
+" Quit normal mode
+nnoremap <Leader>q  :q<CR>
+nnoremap <Leader>Q  :qa!<CR
+
+" Quit visual mode
+vnoremap v <Esc>
+
+" quit ==> close current window
+nnoremap <Leader>q <C-W>w
+
+
+let mapleader=' '
+
+
+"Common Settings"
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set showmode
+set number
+set autoindent
+set smartindent
+set hls
+set relativenumber
+set scrolloff=3
+"set history=100000
+"set clipboard=unnameds
+
+"intellij specific settings
+set highlightedyank
+set surround
+nnoremap ga :action GotoAction<CR>
+nnoremap gc :action GotoClass<CR>
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gf :action GotoFile<CR>
+nnoremap gi :action GotoImplementation<CR>
+nnoremap gs :action GotoSymbol<CR>
+nnoremap gh :action Vcs.ShowTabbedFileHistory<CR>
+nnoremap gp :action GotoSuperMethod<CR>
+
+
+
+nnoremap ss :action ActivateStructureToolWindow<CR>
+nnoremap sd :action FileStructurePopup<CR>
+nnoremap su :action ShowUsages<CR>
+nnoremap sU :action FindUsages<CR>
+nnoremap sp :action ShowPopupMenu<CR>
+nnoremap sg :action ActivateDebugToolWindow<CR>
+nnoremap sf :action ActivateProjectToolWindow<CR>
+nnoremap st :action ActivateTerminalToolWindow<CR>
+nnoremap sh :action HideAllWindows<CR>
+nnoremap s[ :action JumpToLastChanged<CR>
+nnoremap s] :action HideAllWindows<CR>
+"split vertically"
+nnoremap sv <C-W>v
+"split horizontally"
+"nnoremap sh <C-W>h"
+"go to right split window"
+nnoremap sr <C-W>l
+nnoremap sl <C-W>h
+"increment"
+nnoremap s/ <C-a>
+"decrement"
+nnoremap s. <C-x>
+
+
+
+"map sl :action Resume<CR>"
+"map si :action StepInto<CR>"
+"map so :action StepOut<CR>""
+"map sk :action StepInto<CR>
+"map sh :action StepInto<CR>
+"map sp :action EvaluateExpression<CR>"
+map sc :action RunToCursor<CR>
+
+nnoremap ,, :action ToggleLineBreakpoint<CR>
+nnoremap ,f :action ChooseDebugConfiguration<CR>
+nnoremap ,D :action ChooseDebugConfiguration<CR>
+nnoremap ,r :action ChooseRunConfiguration<CR>
+nnoremap ,R :action ChooseRunConfiguration<CR>
+nnoremap ,j :action EditorCloneCaretBelow<CR>
+nnoremap ,k :action EditorCloneCaretAbove<CR>
+nnoremap ,R :action ChooseRunConfiguration<CR>
+nnoremap ,s :nohlsearch<CR>
+
+map ,c <Action>(Stop)
+
+
+
+" Window operation
+nnoremap <Leader>ww <C-W>w
+nnoremap <Leader>wd <C-W>c
+nnoremap <Leader>wj <C-W>j
+nnoremap <Leader>wk <C-W>k
+nnoremap <Leader>wh <C-W>h
+nnoremap <Leader>wl <C-W>l
+nnoremap <Leader>ws <C-W>s
+nnoremap <Leader>w- <C-W>s
+nnoremap <Leader>wv <C-W>v
+nnoremap <Leader>w\| <C-W>v
+
+" Tab operation
+nnoremap tn gt
+nnoremap tp gT
+
+" ==================================================
+" Show all the provided actions via `:actionlist`
+" ==================================================
+
+" built in search looks better
+"nnoremap / :action Find<CR>
+" but preserve ideavim search
+"nnoremap <Leader>/ /
+
+nnoremap <Leader>;; :action CommentByLineComment<CR>
+
+nnoremap <Leader>bb :action ToggleLineBreakpoint<CR>
+nnoremap <Leader>br :action ViewBreakpoints<CR>
+
+nnoremap <Leader>cv :action ChangeView<CR>
+
+nnoremap <Leader>cd :action ChooseDebugConfiguration<CR>
+
+
+nnoremap <Leader>ga :action GotoAction<CR>
+nnoremap <Leader>gc :action GotoClass<CR>
+nnoremap <Leader>gd :action GotoDeclaration<CR>
+nnoremap <Leader>gf :action GotoFile<CR>
+nnoremap <Leader>gi :action GotoImplementation<CR>
+nnoremap <Leader>gs :action GotoSymbol<CR>
+nnoremap <Leader>gt :action GotoTest<CR>
+
+nnoremap <Leader>fp :action ShowFilePath<CR>
+
+nnoremap <Leader>ic :action InspectCode<CR>
+
+nnoremap <Leader>mv :action ActivateMavenProjectsToolWindow<CR>
+
+nnoremap <Leader>oi :action OptimizeImports<CR>
+
+nnoremap <Leader>pm :action ShowPopupMenu<CR>
+
+nnoremap <Leader>rc :action RunToCursor<CR>
+nnoremap <Leader>rC :action ChooseRunConfiguration<CR>
+nnoremap <Leader>re :action RenameElement<CR>
+nnoremap <Leader>rf :action RenameFile<CR>
+
+nnoremap <Leader>rr :action Rerun<CR>
+
+nnoremap <Leader>se :action SearchEverywhere<CR>
+nnoremap <Leader>su :action ShowUsages<CR>
+nnoremap <Leader>tc :action CloseActiveTab<CR>
+nnoremap <Leader>si :action StepInto<CR>
+
+nnoremap <Leader>tb :action ToggleLineBreakpoint<CR>
+
+nnoremap <Leader>tl Vy<CR>:action ActivateTerminalToolWindow<CR>
+vnoremap <Leader>tl y<CR>:action ActivateTerminalToolWindow<CR>
+
+" automatically leave insert mode after 'updatetime' milliseconds of inaction
+au CursorHoldI * stopinsert
+
+function s:MapTOPart(tostart)
+    let char=getchar()
+    if type(char)==type(0)
+        let char=nr2char(char)
+    endif
+    return a:tostart.((char is# 'z')?('w'):(char))
+endfunction
+
+onoremap it iw
+onoremap at aw
+onoremap <expr> i <SID>MapTOPart('i')
+onoremap <expr> a <SID>MapTOPart('a')

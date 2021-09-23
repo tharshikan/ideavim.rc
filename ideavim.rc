@@ -1,46 +1,111 @@
+""" ------------------------- DVORAK SETTINGS-------------------------
 " Quit insert mode
-inoremap jj <Esc>
-inoremap jk <Esc>
-inoremap kk <Esc>
+inoremap hh <Esc>
 
+" wORD left/right
+noremap d b|vnoremap d B|onoremap d |
+noremap n w|vnoremap n w|onoremap n w|
 
-
-" mapping standard horizontal movements to be movements by word instead
-noremap h b
-noremap H B
-noremap l w
-noremap L W
-
-" Move to the start of line/ end of line
-noremap w ^
-noremap e $
-
-"travesing methods
-noremap W :action MethodUp<CR>
-noremap E :action MethodDown<CR>
+" Up/down
+noremap t k|xnoremap t k|onoremap t k|
+noremap h j|xnoremap h j|onoremap h j|
 
 " Move half page faster
-nnoremap J  <C-d>
-nnoremap K  <C-u>
+"nnoremap H  <C-d>
+"nnoremap T  <C-u>,
+nnoremap H 19j
+nnoremap T 19k
 
+nnoremap <Down> 19j
+nnoremap <Up> 19k
+
+nnoremap D  4b
+nnoremap N  4w
+
+" cut
+noremap e d
+noremap E D|xnoremap E D|
+"noremap ee dd|
+
+" replace
+" noremap r c
+noremap = c
+noremap + C|xnoremap > C|
+
+"noremap ee dd|
+"yank
+"noremap , y
+"noremap < Y
+
+" inSert/Replace/append (T)
+noremap l i
+noremap L I
+
+"under
+noremap r o
+noremap R O
+
+"to
+noremap z t
+noremap Z T
+
+"delete using j when in visual mode
+vnoremap j d
+vnoremap k c
+
+
+"Join
+noremap j J
+
+"replace single char
+noremap c r
+
+"undo
 " Redo
 nnoremap U <C-r>
 
-" Quit normal mode
-nnoremap <Leader>q  :q<CR>
-nnoremap <Leader>Q  :qa!<CR
-
-" Quit visual mode
-vnoremap v <Esc>
-
-" quit ==> close current window
-nnoremap <Leader>q <C-W>w
+"ne,
+noremap w :action FindNext<CR>
+noremap m N
 
 
-let mapleader=' '
+noremap . :action Find<CR>
+noremap > ?
+
+"make Y behave just like C or D
+nnoremap Y y$
+
+" inner text objects
+" e.g. dip (delete inner paragraph) is now drp
+function s:MapTOPart(tostart)
+    let char=getchar()
+    if type(char)==type(0)
+        let char=nr2char(char)
+    endif
+    return a:tostart.((char is# 'z')?('w'):(char))
+endfunction
+
+onoremap ln iw
+onoremap lp iw
+onoremap an aw
+onoremap <expr> i <SID>MapTOPart('i')
+onoremap <expr> a <SID>MapTOPart('a')
+
+" Delete/Backspace
+nnoremap <C-d> "_dw|vnoremap <C-d> "_d|inoremap <C-d> <Delete>|cnoremap <C-d> <Delete>|
+nnoremap <Delete> "_x|vnoremap <Delete> "_d|
+nnoremap <Backspace> a<Left><Backspace><Right><Esc>|vnoremap <Backspace> x|
+nnoremap <C-Backspace> a<Left><C-W><Right><Esc>|inoremap <C-Backspace> <C-w>|cnoremap <C-Backspace> <C-w>|
+nnoremap <C-Delete> "_dw|inoremap <C-Delete> <C-o>"_dw|cnoremap <C-Delete> <Delete>|
+nnoremap <S-Backspace> "_d^|inoremap <S-Backspace> <Backspace>|cnoremap <S-Backspace> <Backspace>|
+nnoremap <S-Delete> "_d$|inoremap <S-Delete> <Delete>|cnoremap <S-Delete> <Delete>|
+
+""" ------------------------- DVORAK SETTINGS-------------------------
 
 
-"Common Settings"
+
+
+""" Common settings -------------------------
 set hlsearch
 set incsearch
 set ignorecase
@@ -49,48 +114,93 @@ set showmode
 set number
 set autoindent
 set smartindent
-set hls
-set relativenumber
+"set hls
+"set relativenumber
 set scrolloff=3
 "set history=100000
 "set clipboard=unnameds
+"set selectmode=mouse
 
-"intellij specific settings
+""" Idea specific settings ------------------
+set ideajoin
+set ideastatusicon=gray
+set idearefactormode=keep
 set highlightedyank
-set surround
-nnoremap ga :action GotoAction<CR>
-nnoremap gc :action GotoClass<CR>
-nnoremap gd :action GotoDeclaration<CR>
-nnoremap gf :action GotoFile<CR>
-nnoremap gi :action GotoImplementation<CR>
-nnoremap gs :action GotoSymbol<CR>
-nnoremap gh :action Vcs.ShowTabbedFileHistory<CR>
-nnoremap gp :action GotoSuperMethod<CR>
 
+""" Plugins  --------------------------------
+"set surround
+set multiple-cursors
+set commentary
+set argtextobj
+set easymotion
+set textobj-entire
+set ReplaceWithRegister
 
+""" Plugin settings -------------------------
+let g:argtextobj_pairs="[:],(:),<:>"
+noremap s :action AceAction<CR>
 
-nnoremap ss :action ActivateStructureToolWindow<CR>
-nnoremap sd :action FileStructurePopup<CR>
-nnoremap su :action ShowUsages<CR>
-nnoremap sU :action FindUsages<CR>
-nnoremap sp :action ShowPopupMenu<CR>
-nnoremap sg :action ActivateDebugToolWindow<CR>
-nnoremap sf :action ActivateProjectToolWindow<CR>
-nnoremap st :action ActivateTerminalToolWindow<CR>
-nnoremap sh :action HideAllWindows<CR>
-nnoremap s[ :action JumpToLastChanged<CR>
-nnoremap s] :action HideAllWindows<CR>
+""" Mappings --------------------------------
+nnoremap oo :action Back<CR>
+nnoremap oi :action GotoImplementation<CR>
+nnoremap ot :action GotoTypeDeclaration<CR>
+nnoremap os :action GotoSuperMethod<CR>
+
+nnoremap oc :action GotoClass<CR>
+nnoremap od :action GotoDeclaration<CR>
+nnoremap of :action GotoFile<CR>
+nnoremap os :action GotoSymbol<CR>
+nnoremap oh :action Vcs.ShowTabbedFileHistory<CR>
+
+nnoremap ie :action QuickJavaDoc<CR>
+nnoremap ii :action GotoDeclaration<CR>
+nnoremap it :action QuickTypeDefinition<CR>
+"nnoremap id :action QuickImplementations<CR>
+nnoremap iu :action ShowUsages<CR>
+nnoremap iU :action FindUsages<CR>
+
+nnoremap ip :action ShowPopupMenu<CR>
+nnoremap iv :action Vcs.QuickListPopupAction<CR>
+nnoremap il :action ActivateProjectToolWindow<CR>
+nnoremap it :action ActivateTerminalToolWindow<CR>
+nnoremap ih :action HideAllWindows<CR>
+nnoremap i[ :action JumpToLastChanged<CR>
+nnoremap i] :action HideAllWindows<CR>
 "split vertically"
-nnoremap sv <C-W>v
+nnoremap ov <C-W>v
 "split horizontally"
 "nnoremap sh <C-W>h"
 "go to right split window"
-nnoremap sr <C-W>l
-nnoremap sl <C-W>h
+nnoremap or <C-W>l
+nnoremap ol <C-W>h
 "increment"
-nnoremap s/ <C-a>
+nnoremap o. <C-a>
 "decrement"
-nnoremap s. <C-x>
+nnoremap o, <C-x>
+
+"delete/change in word
+nnoremap es diw
+nnoremap =s ciw
+
+"delete/change in () {} []
+
+nnoremap eh di(
+nnoremap et di{
+nnoremap ed di[
+nnoremap =h ci(
+nnoremap =t ci{
+nnoremap =d ci[
+
+
+
+"delete/change around () {} []
+
+nnoremap eah da(
+nnoremap eat da{
+nnoremap ead da[
+nnoremap =ah ca(
+nnoremap =at ca{
+nnoremap =ad ca[
 
 
 
@@ -100,7 +210,7 @@ nnoremap s. <C-x>
 "map sk :action StepInto<CR>
 "map sh :action StepInto<CR>
 "map sp :action EvaluateExpression<CR>"
-map sc :action RunToCursor<CR>
+"map sc :action RunToCursor<CR>
 
 nnoremap ,, :action ToggleLineBreakpoint<CR>
 nnoremap ,f :action ChooseDebugConfiguration<CR>
@@ -114,7 +224,7 @@ nnoremap ,s :nohlsearch<CR>
 
 map ,c <Action>(Stop)
 
-
+let mapleader=' '
 
 " Window operation
 nnoremap <Leader>ww <C-W>w
@@ -129,8 +239,7 @@ nnoremap <Leader>wv <C-W>v
 nnoremap <Leader>w\| <C-W>v
 
 " Tab operation
-nnoremap tn gt
-nnoremap tp gT
+"nnoremap tp gT
 
 " ==================================================
 " Show all the provided actions via `:actionlist`
@@ -153,6 +262,7 @@ nnoremap <Leader>cd :action ChooseDebugConfiguration<CR>
 
 nnoremap <Leader>ga :action GotoAction<CR>
 nnoremap <Leader>gc :action GotoClass<CR>
+
 nnoremap <Leader>gd :action GotoDeclaration<CR>
 nnoremap <Leader>gf :action GotoFile<CR>
 nnoremap <Leader>gi :action GotoImplementation<CR>
