@@ -11,10 +11,10 @@ noremap t k|xnoremap t k|onoremap t k|
 noremap h j|xnoremap h j|onoremap h j|
 
 " Move half page faster
-"nnoremap H  <C-d>
-"nnoremap T  <C-u>,
-nnoremap H 19j
-nnoremap T 19k
+nnoremap H  <C-d>
+nnoremap T  <C-u>,
+nnoremap H :action MoveLineDown<CR>
+nnoremap T :action MoveLineUp<CR>
 
 nnoremap <Down> 19j
 nnoremap <Up> 19k
@@ -53,9 +53,8 @@ noremap Z T
 vnoremap j d
 vnoremap k c
 
-
-"Join
-noremap j J
+"Join and keep it centered
+noremap j mzJ'z
 
 "replace single char
 noremap c r
@@ -64,12 +63,12 @@ noremap c r
 " Redo
 nnoremap U <C-r>
 
-"ne,
-noremap w :action FindNext<CR>
-noremap m N
+"find and keep it centered
+noremap w nzzzv
+noremap m Nzzzv
 
 
-noremap . :action Find<CR>
+noremap . /
 noremap > ?
 
 "make Y behave just like C or D
@@ -298,4 +297,8 @@ vnoremap <Leader>tl y<CR>:action ActivateTerminalToolWindow<CR>
 
 " automatically leave insert mode after 'updatetime' milliseconds of inaction
 au CursorHoldI * stopinsert
+
+nnoremap ,, dd^Wjp^Wk
+nnoremap ,a getText(res.<Esc>pxbhxywA<Esc>p
+
 
