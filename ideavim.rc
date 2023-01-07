@@ -1,3 +1,56 @@
+""" --------------------Common settings -------------------------
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set showmode
+set number
+set autoindent
+set smartindent
+"set hls
+set relativenumber
+set scrolloff=2
+"set history=100000
+"set clipboard=unnameds
+"set selectmode=mouse
+" automatically leave insert mode after 'updatetime' milliseconds of inaction
+au CursorHoldI * stopinsert
+""" --------------------Common settings END -------------------------
+
+
+
+""" --------------------Idea specific settings ------------------
+let mapleader=' '
+set ideajoin
+set ideastatusicon=gray
+set idearefactormode=keep
+set highlightedyank
+
+""" Plugins  --------------------------------
+"set surround
+"noremap sss cs'<q>
+"noremap o. cs'<q>
+
+set multiple-cursors
+"set commentary
+set argtextobj
+
+set NERDTree
+
+
+"let g:NERDTreeMapJumpLastChild= 'h'
+set easymotion
+set textobj-entire
+set ReplaceWithRegister
+
+""" Plugin settings -------------------------
+let g:argtextobj_pairs="[:],(:),<:>"
+let g:NERDTreeMapJumpLastChild="\h"
+"noremap ss :action AceAction<CR>
+""" --------------------Idea specific settings ------------------
+
+
+
 """ ------------------------- DVORAK SETTINGS-------------------------
 " Quit insert mode
 inoremap hh <Esc>
@@ -9,15 +62,18 @@ noremap n w|vnoremap n w|onoremap n w|
 " Up/down
 noremap t k|xnoremap t k|onoremap t k|
 noremap h j|xnoremap h j|onoremap h j|
+"map h j
 
 " Move half page faster
-nnoremap H  <C-d>
-nnoremap T  <C-u>,
-nnoremap H :action MoveLineDown<CR>
-nnoremap T :action MoveLineUp<CR>
+"nnoremap H  <C-d>
+"nnoremap T  <C-u>,
+nnoremap H  25j
+nnoremap T  25k,
+"nnoremap H :action MoveLineDown<CR>
+"nnoremap T :action MoveLineUp<CR>
 
-nnoremap <Down> 19j
-nnoremap <Up> 19k
+nnoremap <Down> 15j
+nnoremap <Up> 15k
 
 nnoremap D  4b
 nnoremap N  4w
@@ -46,8 +102,8 @@ noremap r o
 noremap R O
 
 "to
-noremap z t
-noremap Z T
+"noremap z t
+"noremap Z T
 
 "delete using j when in visual mode
 vnoremap j d
@@ -57,22 +113,102 @@ vnoremap k c
 noremap j mzJ'z
 
 "replace single char
-noremap c r
+"noremap c r
 
 "undo
 " Redo
 nnoremap U <C-r>
 
 "find and keep it centered
-noremap w nzzzv
-noremap m Nzzzv
+noremap v nzzzv
+noremap w Nzzzv
+
+noremap V Nzzzv
 
 
 noremap . /
 noremap > ?
 
+noremap c .
+noremap C >
+
+nnoremap s v
+nnoremap S V
+
+
+nnoremap oi gi
+
+
+
 "make Y behave just like C or D
 nnoremap Y y$
+
+nnoremap ep dip
+nnoremap =p cip
+nnoremap yp yip
+nnoremap sp vip
+
+"delete/change in word
+nnoremap es dw
+nnoremap en diw
+nnoremap =s cw
+nnoremap =n ciw
+nnoremap ean daw
+nnoremap =an caw
+nnoremap sn viw
+nnoremap yn yiw
+nnoremap san vaw
+nnoremap yan yaw
+
+"delete/change in () {} [] ''
+nnoremap eh di{
+nnoremap et dit
+nnoremap er di(
+nnoremap ed di[
+nnoremap el di'
+
+nnoremap =h ci{
+nnoremap =t cit
+nnoremap =r ci(
+nnoremap =d ci[
+nnoremap =l ci'
+
+nnoremap yh yi{
+nnoremap yt yit
+nnoremap yr yi(
+nnoremap yd yi[
+nnoremap yl yi'
+
+nnoremap sh vi{
+nnoremap st vit
+nnoremap sr vi(
+nnoremap sd vi[
+nnoremap sl si'
+
+"delete/change around () {} []
+nnoremap eah da{
+nnoremap eat dat
+nnoremap ear da(
+nnoremap ead da[
+nnoremap eal da'
+
+nnoremap =ah ca{
+nnoremap =at cat
+nnoremap =ar ca(
+nnoremap =ad ca[
+nnoremap =al ca'
+
+nnoremap yah ya{
+nnoremap yat yat
+nnoremap yar ya(
+nnoremap yad ya[
+nnoremap yal ya'
+
+nnoremap sah va{
+nnoremap sat vat
+nnoremap sar va(
+nnoremap sad va[
+nnoremap sal va'
 
 " inner text objects
 " e.g. dip (delete inner paragraph) is now drp
@@ -85,7 +221,7 @@ function s:MapTOPart(tostart)
 endfunction
 
 onoremap ln iw
-onoremap lp iw
+"onoremap lp iw
 onoremap an aw
 onoremap <expr> i <SID>MapTOPart('i')
 onoremap <expr> a <SID>MapTOPart('a')
@@ -98,77 +234,20 @@ nnoremap <C-Backspace> a<Left><C-W><Right><Esc>|inoremap <C-Backspace> <C-w>|cno
 nnoremap <C-Delete> "_dw|inoremap <C-Delete> <C-o>"_dw|cnoremap <C-Delete> <Delete>|
 nnoremap <S-Backspace> "_d^|inoremap <S-Backspace> <Backspace>|cnoremap <S-Backspace> <Backspace>|
 nnoremap <S-Delete> "_d$|inoremap <S-Delete> <Delete>|cnoremap <S-Delete> <Delete>|
-
-""" ------------------------- DVORAK SETTINGS-------------------------
-
+""" ------------------------- DVORAK SETTINGS END -------------------------
 
 
 
-""" Common settings -------------------------
-set hlsearch
-set incsearch
-set ignorecase
-set smartcase
-set showmode
-set number
-set autoindent
-set smartindent
-"set hls
-"set relativenumber
-set scrolloff=3
-"set history=100000
-"set clipboard=unnameds
-"set selectmode=mouse
+""" ---------------------------COMMON MAPPINGS--------------------------------
 
-""" Idea specific settings ------------------
-set ideajoin
-set ideastatusicon=gray
-set idearefactormode=keep
-set highlightedyank
 
-""" Plugins  --------------------------------
-"set surround
-set multiple-cursors
-set commentary
-set argtextobj
-set easymotion
-set textobj-entire
-set ReplaceWithRegister
 
-""" Plugin settings -------------------------
-let g:argtextobj_pairs="[:],(:),<:>"
-noremap s :action AceAction<CR>
-
-""" Mappings --------------------------------
-nnoremap oo :action Back<CR>
-nnoremap oi :action GotoImplementation<CR>
-nnoremap ot :action GotoTypeDeclaration<CR>
-nnoremap os :action GotoSuperMethod<CR>
-
-nnoremap oc :action GotoClass<CR>
-nnoremap od :action GotoDeclaration<CR>
-nnoremap of :action GotoFile<CR>
-nnoremap os :action GotoSymbol<CR>
-nnoremap oh :action Vcs.ShowTabbedFileHistory<CR>
-
-nnoremap ie :action QuickJavaDoc<CR>
-nnoremap ii :action GotoDeclaration<CR>
-nnoremap it :action QuickTypeDefinition<CR>
-"nnoremap id :action QuickImplementations<CR>
-nnoremap iu :action ShowUsages<CR>
-nnoremap iU :action FindUsages<CR>
-
-nnoremap ip :action ShowPopupMenu<CR>
-nnoremap iv :action Vcs.QuickListPopupAction<CR>
-nnoremap il :action ActivateProjectToolWindow<CR>
-nnoremap it :action ActivateTerminalToolWindow<CR>
-nnoremap ih :action HideAllWindows<CR>
-nnoremap i[ :action JumpToLastChanged<CR>
-nnoremap i] :action HideAllWindows<CR>
 "split vertically"
-nnoremap ov <C-W>v
+nnoremap is <C-W>v
 "split horizontally"
 "nnoremap sh <C-W>h"
+"close window"
+nnoremap ix :hide <CR>
 "go to right split window"
 nnoremap or <C-W>l
 nnoremap ol <C-W>h
@@ -176,54 +255,6 @@ nnoremap ol <C-W>h
 nnoremap o. <C-a>
 "decrement"
 nnoremap o, <C-x>
-
-"delete/change in word
-nnoremap es diw
-nnoremap =s ciw
-
-"delete/change in () {} []
-
-nnoremap eh di(
-nnoremap et di{
-nnoremap ed di[
-nnoremap =h ci(
-nnoremap =t ci{
-nnoremap =d ci[
-
-
-
-"delete/change around () {} []
-
-nnoremap eah da(
-nnoremap eat da{
-nnoremap ead da[
-nnoremap =ah ca(
-nnoremap =at ca{
-nnoremap =ad ca[
-
-
-
-"map sl :action Resume<CR>"
-"map si :action StepInto<CR>"
-"map so :action StepOut<CR>""
-"map sk :action StepInto<CR>
-"map sh :action StepInto<CR>
-"map sp :action EvaluateExpression<CR>"
-"map sc :action RunToCursor<CR>
-
-nnoremap ,, :action ToggleLineBreakpoint<CR>
-nnoremap ,f :action ChooseDebugConfiguration<CR>
-nnoremap ,D :action ChooseDebugConfiguration<CR>
-nnoremap ,r :action ChooseRunConfiguration<CR>
-nnoremap ,R :action ChooseRunConfiguration<CR>
-nnoremap ,j :action EditorCloneCaretBelow<CR>
-nnoremap ,k :action EditorCloneCaretAbove<CR>
-nnoremap ,R :action ChooseRunConfiguration<CR>
-nnoremap ,s :nohlsearch<CR>
-
-map ,c <Action>(Stop)
-
-let mapleader=' '
 
 " Window operation
 nnoremap <Leader>ww <C-W>w
@@ -236,69 +267,145 @@ nnoremap <Leader>ws <C-W>s
 nnoremap <Leader>w- <C-W>s
 nnoremap <Leader>wv <C-W>v
 nnoremap <Leader>w\| <C-W>v
+""" ---------------------------COMMON MAPPINGS END--------------------------------
 
-" Tab operation
-"nnoremap tp gT
 
-" ==================================================
-" Show all the provided actions via `:actionlist`
-" ==================================================
 
-" built in search looks better
-"nnoremap / :action Find<CR>
-" but preserve ideavim search
-"nnoremap <Leader>/ /
+
+""" ---------------------------IDEAVIM SETTINGS--------------------------------
+nnoremap ,s :source ~/.ideavimrc<CR>
+
+nnoremap oo :action Back<CR>
+nnoremap oe :action ActivateProblemsViewToolWindow<CR>
+nnoremap oi :action GotoImplementation<CR>
+nnoremap od :action ChooseDebugConfiguration<CR>
+"nnoremap oh :action ActivateProjectToolWindow<CR>
+nnoremap oh :NERDTree<CR>
+nnoremap ot :action ActivateTerminalToolWindow<CR>
+nnoremap on :action ActivateDebugToolWindow<CR>
+nnoremap os :action ActivateStructureToolWindow<CR>
+nnoremap ov :action Vcs.QuickListPopupAction<CR>
+"nnoremap or :action RunToCursor<CR>
+nnoremap of :action Vcs.ShowTabbedFileHistory<CR>
+nnoremap oc :action ActivateCommitToolWindow<CR>
+nnoremap ob :action ActivateVersionControlToolWindow<CR>
+nnoremap oq :action IdeaVim.ReloadVimRc.reload<CR>
+
+nnoremap ii :action GotoDeclaration<CR>
+nnoremap id :action GotoImplementation<CR>
+nnoremap ih :action QuickJavaDoc<CR>
+nnoremap it :action ToggleLineBreakpoint<CR>
+nnoremap in :action HideAllWindows<CR>
+nnoremap is  :nohlsearch<CR>
+nnoremap ir :action Vcs.RollbackChangedLines<CR>
+nnoremap iu :action ShowUsages<CR>
+nnoremap iU :action FindUsages<CR>
+
+nnoremap ip :action ShowPopupMenu<CR>
+nnoremap il :action JumpToLastWindow<CR>
+nnoremap il :action JumpToLastWindow<CR>
+"nnoremap it :action ActivateTerminalToolWindow<CR>
+"nnoremap ih :action HideAllWindows<CR>
+nnoremap i[ :action JumpToLastChanged<CR>
+nnoremap i] :action HideAllWindows<CR>
+nnoremap i; gdzz
+map ib hhh :action GotoImplementation<CR>
+
+
+nnoremap ir :action CollapseRegion<CR>
+nnoremap il :action ExpandRegion<CR>
+nnoremap ib :action CollapseAllRegions<CR>
+
+map ss <Plug>(easymotion-s)
+map sf <Plug>(easymotion-f)
+"map sw <Plug>(easymotion-w)
+"map sW <Plug>(easymotion-W)
+"map sb <Plug>(easymotion-b)
+"map sB <Plug>(easymotion-B)
+"map se <Plug>(easymotion-e)
+"map sE <Plug>(easymotion-E)
+"map sge<Plug>(easymotion-ge)
+"map sgE<Plug>(easymotion-gE
+"map sj <Plug>(easymotion-j)
+"map sk <Plug>(easymotion-k)
+"map sn <Plug>(easymotion-n)
+"map sN <Plug>(easymotion-N)
+"map ss <Plug>(easymotion-s)
+"map sb <Plug>(easymotion-bd-wl)
+
+"map cc gcc
+"map cp gcap
+"map cs
 
 nnoremap <Leader>;; :action CommentByLineComment<CR>
-
 nnoremap <Leader>bb :action ToggleLineBreakpoint<CR>
 nnoremap <Leader>br :action ViewBreakpoints<CR>
-
 nnoremap <Leader>cv :action ChangeView<CR>
-
 nnoremap <Leader>cd :action ChooseDebugConfiguration<CR>
-
-
 nnoremap <Leader>ga :action GotoAction<CR>
 nnoremap <Leader>gc :action GotoClass<CR>
-
 nnoremap <Leader>gd :action GotoDeclaration<CR>
 nnoremap <Leader>gf :action GotoFile<CR>
 nnoremap <Leader>gi :action GotoImplementation<CR>
 nnoremap <Leader>gs :action GotoSymbol<CR>
 nnoremap <Leader>gt :action GotoTest<CR>
-
 nnoremap <Leader>fp :action ShowFilePath<CR>
-
 nnoremap <Leader>ic :action InspectCode<CR>
-
 nnoremap <Leader>mv :action ActivateMavenProjectsToolWindow<CR>
-
 nnoremap <Leader>oi :action OptimizeImports<CR>
-
 nnoremap <Leader>pm :action ShowPopupMenu<CR>
-
 nnoremap <Leader>rc :action RunToCursor<CR>
 nnoremap <Leader>rC :action ChooseRunConfiguration<CR>
 nnoremap <Leader>re :action RenameElement<CR>
 nnoremap <Leader>rf :action RenameFile<CR>
-
 nnoremap <Leader>rr :action Rerun<CR>
-
 nnoremap <Leader>se :action SearchEverywhere<CR>
 nnoremap <Leader>su :action ShowUsages<CR>
 nnoremap <Leader>tc :action CloseActiveTab<CR>
 nnoremap <Leader>si :action StepInto<CR>
-
 nnoremap <Leader>tb :action ToggleLineBreakpoint<CR>
-
 nnoremap <Leader>tl Vy<CR>:action ActivateTerminalToolWindow<CR>
 vnoremap <Leader>tl y<CR>:action ActivateTerminalToolWindow<CR>
 
-" automatically leave insert mode after 'updatetime' milliseconds of inaction
-au CursorHoldI * stopinsert
 
-nnoremap ,, dd^Wjp^Wk
-nnoremap ,a getText(res.<Esc>pxbhxywA<Esc>p
+
+nnoremap ,, :action ToggleLineBreakpoint<CR>
+nnoremap ,f :action ChooseDebugConfiguration<CR>
+nnoremap ,D :action ChooseDebugConfiguration<CR>
+nnoremap ,r :action ChooseRunConfiguration<CR>
+nnoremap ,R :action ChooseRunConfiguration<CR>
+nnoremap ,j :action EditorCloneCaretBelow<CR>
+nnoremap ,k :action EditorCloneCaretAbove<CR>
+nnoremap ,R :action ChooseRunConfiguration<CR>
+nnoremap ,l :nohlsearch<CR>
+vnoremap ,, :action de.netnexus.CamelCasePlugin.ToggleCamelCase<CR>
+:let @c="ynna'^H"hhpna,hhnUEhLhhn"
+""" ---------------------------IDEAVIM SETTINGS END-------------------------------
+
+
+"--------------GIT-------
+nmap <Leader>rr  :action ChangesView.Revert<CR>
+"nmap <Leader>rr  :action CommittedChanges.Revert<CR>
+"nmap <Leader>rr  :action Git.Revert.In.Log<CR>
+"nmap <Leader>rr  :action Vcs.RevertSelectedChanges<CR
+nmap <Leader>ii :action VcsShowPrevChangeMarker<cr>
+nmap <Leader>oo  :action  VcsShowNextChangeMarker<CR>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
