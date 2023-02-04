@@ -1,38 +1,145 @@
+""" ------------------------- DVORAK SETTINGS-------------------------
 " Quit insert mode
-inoremap jj <Esc>
-inoremap jk <Esc>
-inoremap kk <Esc>
+inoremap hh <Esc>
 
-" mapping standard horizontal movements to be movements by word instead
-noremap h b
-noremap H B
-noremap l w
-noremap L W
+" wORD left/right
+"noremap d b|vnoremap d B|onoremap d |
+nnoremap d b
+noremap n w|vnoremap n w|onoremap n w|
 
-" Move to the start of line/ end of line
-noremap w ^
-noremap e $
-
-"travesing methods
-noremap W :action MethodUp<CR>
-noremap E :action MethodDown<CR>
+" Up/down
+noremap t k|xnoremap t k|onoremap t k|
+noremap h j|xnoremap h j|onoremap h j|
 
 " Move half page faster
-nnoremap J  <C-d>
-nnoremap K  <C-u>
+nnoremap H  <C-d>
+nnoremap T  <C-u>,
+nnoremap H :action MoveLineDown<CR>
+nnoremap T :action MoveLineUp<CR>
 
+nnoremap <Down> 19j
+nnoremap <Up> 19k
+
+nnoremap D  4b
+nnoremap N  4w
+
+" cut
+noremap e d
+noremap E D|xnoremap E D|
+"noremap ee dd|
+
+" replace
+" noremap r c
+noremap = c
+noremap + C|xnoremap > C|
+
+"noremap ee dd|
+"yank
+"noremap , y
+"noremap < Y
+
+" inSert/Replace/append (T)
+noremap l i
+noremap L I
+
+"under
+noremap r o
+noremap R O
+
+"to
+noremap z t
+noremap Z T
+
+"delete using j when in visual mode
+vnoremap j d
+vnoremap k c
+
+"Join and keep it centered
+noremap j mzJ'z
+
+"replace single char
+noremap c r
+
+"undo
 " Redo
-nnoremap U <C-r
+nnoremap U <C-r>
 
-" Quit normal mode
-nnoremap <Leader>q  :q<CR>
-nnoremap <Leader>Q  :qa!<CR>
+"find and keep it centered
+noremap w nzzzv
+noremap m Nzzzv
 
-" Quit visual mode
-vnoremap v <Esc>
 
-" quit ==> close current window
-nnoremap <Leader>q <C-W>w
+noremap . /
+noremap > ?
+
+"make Y behave just like C or D
+nnoremap Y y$
+
+" inner text objects
+" e.g. dip (delete inner paragraph) is now drp
+function s:MapTOPart(tostart)
+    let char=getchar()
+    if type(char)==type(0)
+        let char=nr2char(char)
+    endif
+    return a:tostart.((char is# 'z')?('w'):(char))
+endfunction
+
+onoremap ln iw
+onoremap lp iw
+onoremap an aw
+onoremap <expr> i <SID>MapTOPart('i')
+onoremap <expr> a <SID>MapTOPart('a')
+
+" Delete/Backspace
+nnoremap <C-d> "_dw|vnoremap <C-d> "_d|inoremap <C-d> <Delete>|cnoremap <C-d> <Delete>|
+nnoremap <Delete> "_x|vnoremap <Delete> "_d|
+nnoremap <Backspace> a<Left><Backspace><Right><Esc>|vnoremap <Backspace> x|
+nnoremap <C-Backspace> a<Left><C-W><Right><Esc>|inoremap <C-Backspace> <C-w>|cnoremap <C-Backspace> <C-w>|
+nnoremap <C-Delete> "_dw|inoremap <C-Delete> <C-o>"_dw|cnoremap <C-Delete> <Delete>|
+nnoremap <S-Backspace> "_d^|inoremap <S-Backspace> <Backspace>|cnoremap <S-Backspace> <Backspace>|
+nnoremap <S-Delete> "_d$|inoremap <S-Delete> <Delete>|cnoremap <S-Delete> <Delete>|
+
+""" ------------------------- DVORAK SETTINGS-------------------------
+
+"split vertically"
+nnoremap ov <C-W>v
+"split horizontally"
+"nnoremap sh <C-W>h"
+"go to right split window"
+nnoremap or <C-W>l
+nnoremap ol <C-W>h
+"increment"
+nnoremap o. <C-a>
+"decrement"
+nnoremap o, <C-x>
+
+"delete/change in word
+nnoremap es diw
+nnoremap =s ciw
+
+"delete/change in () {} []
+
+nnoremap eh di(
+nnoremap et di{
+nnoremap ed di[
+nnoremap =h ci(
+nnoremap =t ci{
+nnoremap =d ci[
+
+
+
+"delete/change around () {} []
+
+nnoremap eah da(
+nnoremap eat da{
+nnoremap ead da[
+nnoremap =ah ca(
+nnoremap =at ca{
+nnoremap =ad ca[
+
+
+
 
 
 let mapleader=' '
@@ -84,6 +191,8 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'preservim/nerdtree'
 Plug 'ycm-core/YouCompleteMe'
 Plug 'doums/darcula'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
 call plug#end()
 
@@ -99,11 +208,15 @@ autocmd WinLeave * setlocal nocursorline
 "highlight CursorLine guibg=#303000 ctermbg=234
 "highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 "set cpoptions+=n
+"colorscheme onehalflight
+set background=dark
 
-"colorscheme gruvbox
+colorscheme gruvbox
+set bg=dark
 "colorscheme onedark
-colorscheme darcula
-set termguicolors
+"colorscheme grim
+"colorscheme darcula
+"set termguicolors
 syntax on
 set number
 highlight Normal ctermbg=None
@@ -125,6 +238,6 @@ let g:airline_left_alt_sep = '|'
 let g:airline_right_sep = ' '
 let g:airline_right_alt_sep = '|'
 let g:airline_powerline_fonts=1
-let g:airline_theme='molokai'
-
+"let g:airline_theme='molokai'
+"let g:lightline.colorscheme='onehalflight'
 
